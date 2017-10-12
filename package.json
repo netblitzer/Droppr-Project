@@ -1,0 +1,33 @@
+{
+  "name": "Project_1-Pinterest_Clone",
+  "version": "1.0.0",
+  "description": "API Study Guide",
+  "main": "./src/server.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "nodemon": "^1.12.1"
+  },
+  "scripts": {
+    "nodemon": "nodemon --watch ./src ./src/server.js",
+    "build": "babel ./client --out-file ./hosted/bundle.js",
+    "watch": "babel --watch ./client --out-file ./hosted/bundle.js",
+    "start": "node ./src/server.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netblitzer/http-api-assignment-ii.git"
+  },
+  "author": "Luke Miller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netblitzer/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/netblitzer/http-api-assignment#readme"
+}

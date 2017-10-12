@@ -1,0 +1,111 @@
+.size-1-2 {
+  width: 16.67%; }
+  .size-1-2:before {
+    content: "";
+    float: left;
+    padding-bottom: 200%; }
+  .size-1-2:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-1-3 {
+  width: 16.67%; }
+  .size-1-3:before {
+    content: "";
+    float: left;
+    padding-bottom: 300%; }
+  .size-1-3:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-2-2 {
+  width: 33.33%; }
+  .size-2-2:before {
+    content: "";
+    float: left;
+    padding-bottom: 100%; }
+  .size-2-2:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-2-3 {
+  width: 33.33%; }
+  .size-2-3:before {
+    content: "";
+    float: left;
+    padding-bottom: 150%; }
+  .size-2-3:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-3-2 {
+  width: 50%; }
+  .size-3-2:before {
+    content: "";
+    float: left;
+    padding-bottom: 66.66%; }
+  .size-3-2:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-3-3 {
+  width: 50%; }
+  .size-3-3:before {
+    content: "";
+    float: left;
+    padding-bottom: 100%; }
+  .size-3-3:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-3-4 {
+  width: 50%; }
+  .size-3-4:before {
+    content: "";
+    float: left;
+    padding-bottom: 133.33%; }
+  .size-3-4:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-4-2 {
+  width: 66.66%; }
+  .size-4-2:before {
+    content: "";
+    float: left;
+    padding-bottom: 50%; }
+  .size-4-2:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-4-3 {
+  width: 66.66%; }
+  .size-4-3:before {
+    content: "";
+    float: left;
+    padding-bottom: 75%; }
+  .size-4-3:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+.size-4-4 {
+  width: 66.66%; }
+  .size-4-4:before {
+    content: "";
+    float: left;
+    padding-bottom: 100%; }
+  .size-4-4:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+/*# sourceMappingURL=sizes.css.map */
