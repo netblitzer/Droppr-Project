@@ -44,7 +44,7 @@
       
       <div id="bumper"></div>
       
-      <div class="column">
+      <div class="column" data-count="1" data-height="0">
         
         <div class="card">
           <div class="card-interior">
@@ -121,10 +121,14 @@
           </div>
         </div>
         <input id="linkTitle" type="text" name="Title" maxlength="64" placeholder="Title" />
+        
         <p id="errorTitle" class="errorWarning"  data-active="false">Title is required</p>
+        
         <input id="link" type="text" name="Link" placeholder="Link" />
         <p id="errorLinkMissing" class="errorWarning"  data-active="false">Link is required</p>
+        
         <p id="errorLinkBroken" class="errorWarning"  data-active="false">Link entered isn't valid</p>
+        
         <div id="linkFind" class="noSelect">Find Image</div>
 
         <div id="imagePreviewBox">
@@ -132,6 +136,7 @@
         </div>
 
         <textarea id="linkDescription" wrap="soft" placeholder="Description"></textarea>
+        
         <input id="linkUserName" type="text" name="Link" maxlength="64" placeholder="User Name" />
 
         <ul>
@@ -142,6 +147,7 @@
             <p class="noSelect">Cancel</p>
           </li>
         </ul>
+        <p id="errorFailedSubmission" class="errorWarning"  data-active="false">Submission failed</p>
       </section>
     
       <div id="blackOutDiv" data-active="false"></div>

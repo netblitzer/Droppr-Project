@@ -30,7 +30,40 @@ const respondJSONMeta = (request, response, status) => {
   response.end();
 };
 
-const getUsers = (request, response) => {
+const newPost = (request, response, sentObj) => {
+  const responseJson = {
+    message: 'Created successfully',
+  };
+  let statusCode = 201;
+  
+  const obj = { };
+  
+  // check to see if there's a time parameter on the object
+  // if there's not, then this object fails to be valid
+  if (!sentObj.time) {
+    
+  }
+  
+  //if (!bodyParams.name || !bodyParams.age) {
+  //  responseJson.message = 'Name and age are both required';
+  //  responseJson.id = 'missingParams';
+  //  statusCode = 400;
+//
+  //  return respondJSON(request, response, statusCode, responseJson);
+  //} else if (users[bodyParams.name]) {
+  //  responseJson.message = 'Updated successfully';
+  //  statusCode = 204;
+  //}
+//
+  //users[bodyParams.name] = bodyParams;
+//
+  //etag = crypto.createHash('sha1').update(JSON.stringify(users));
+  //digest = etag.digest('hex');
+
+  return respondJSON(request, response, statusCode, responseJson);
+};
+
+const getPosts = (request, response, parsedUrl) => {
   const responseJSON = {
     users,
   };
@@ -42,32 +75,7 @@ const getUsers = (request, response) => {
   return respondJSON(request, response, 200, responseJSON);
 };
 
-const addUser = (request, response, bodyParams) => {
-  const responseJson = {
-    message: 'Created successfully',
-  };
-  let statusCode = 201;
-
-  if (!bodyParams.name || !bodyParams.age) {
-    responseJson.message = 'Name and age are both required';
-    responseJson.id = 'missingParams';
-    statusCode = 400;
-
-    return respondJSON(request, response, statusCode, responseJson);
-  } else if (users[bodyParams.name]) {
-    responseJson.message = 'Updated successfully';
-    statusCode = 204;
-  }
-
-  users[bodyParams.name] = bodyParams;
-
-  etag = crypto.createHash('sha1').update(JSON.stringify(users));
-  digest = etag.digest('hex');
-
-  return respondJSON(request, response, statusCode, responseJson);
-};
-
-const getUsersMeta = (request, response) => {
+const getPostsMeta = (request, response) => {
   if (request.headers['if-none-match'] === digest) {
     return respondJSONMeta(request, response, 304);
   }
@@ -87,9 +95,9 @@ const notFound = (request, response) => {
 const notFoundMeta = (request, response) => respondJSONMeta(request, response, 404);
 
 module.exports = {
-  addUser,
-  getUsers,
-  getUsersMeta,
+  newPost,
+  getPosts,
+  getPostsMeta,
   notFound,
   notFoundMeta,
 };

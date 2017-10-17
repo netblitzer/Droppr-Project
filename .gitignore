@@ -56,3 +56,13 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# ignore sass files
+*.scss
+*.css.map
+hosted/.sass-cache/
+
+# ignore zips
+*.zip
+*.rar
+*.7z

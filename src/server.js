@@ -13,15 +13,15 @@ const handleGet = (request, response, parsedUrl) => {
     htmlHandler.getCSS(request, response);
   } else if (parsedUrl.pathname === '/bundle.js') {
     htmlHandler.getJS(request, response);
-  } else if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsers(request, response);
+  } else if (parsedUrl.pathname === '/getPosts') {
+    jsonHandler.getPosts(request, response, parsedUrl);
   } else {
     jsonHandler.notFound(request, response);
   }
 };
 
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/addUser') {
+  if (parsedUrl.pathname === '/newPost') {
     const res = response;
 
     const body = [];
@@ -37,10 +37,9 @@ const handlePost = (request, response, parsedUrl) => {
     });
 
     request.on('end', () => {
-      const bodyString = Buffer.concat(body).toString();
-      const bodyParams = query.parse(bodyString);
+      const sentObj = JSON.parse(Buffer.concat(body).toString());
 
-      jsonHandler.addUser(request, res, bodyParams);
+      jsonHandler.newPost(request, res, sentObj);
     });
   } else {
     jsonHandler.notFound(request, response);
