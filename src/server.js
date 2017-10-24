@@ -1,11 +1,12 @@
 const http = require('http');
 const url = require('url');
-const query = require('querystring');
+// const query = require('querystring'); never used
 const htmlHandler = require('./htmlResponses.js');
 const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
+// switch case for handling the GET requests
 const handleGet = (request, response, parsedUrl) => {
   if (parsedUrl.pathname === '/') {
     htmlHandler.getIndex(request, response);
@@ -20,10 +21,12 @@ const handleGet = (request, response, parsedUrl) => {
   }
 };
 
+// method of handling POST requests
 const handlePost = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/newPost') {
+  if (parsedUrl.pathname === '/newPost' || parsedUrl.pathname === '/updatePost') {
     const res = response;
 
+    // get the sent data from the request
     const body = [];
 
     request.on('error', (err) => {
@@ -36,24 +39,32 @@ const handlePost = (request, response, parsedUrl) => {
       body.push(chunk);
     });
 
+    // when it's sent, parse it
     request.on('end', () => {
       const sentObj = JSON.parse(Buffer.concat(body).toString());
 
-      jsonHandler.newPost(request, res, sentObj);
+      if (parsedUrl.pathname === '/newPost') {
+        jsonHandler.newPost(request, res, sentObj);
+      } else {
+        jsonHandler.updatePost(request, res, sentObj);
+      }
     });
   } else {
     jsonHandler.notFound(request, response);
   }
 };
 
+// method for handling HEAD requests
 const handleHead = (request, response, parsedUrl) => {
-  if (parsedUrl.pathname === '/getUsers') {
-    jsonHandler.getUsersMeta(request, response);
+  if (parsedUrl.pathname === '/getPosts') {
+    jsonHandler.getPostsMeta(request, response);
   } else {
     jsonHandler.notFoundMeta(request, response);
   }
 };
 
+
+// method for handling what we do when we get a request
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
 

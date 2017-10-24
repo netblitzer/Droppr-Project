@@ -25,30 +25,16 @@
       </div>
     </nav>
     
-    <!--
-      Sizes for cards:
-        1-2
-        1-3
-        2-2
-        2-3
-        2-4
-        3-2
-        3-3
-        3-4
-        4-2
-        4-3
-        4-4
-    -->
     
     <div id="contentWrapper">
       
-      <div id="bumper"></div>
-      
-      <div class="column" data-count="1" data-height="0">
-        
+      <div id="c1" class="column">
+        <!--
         <div class="card">
           <div class="card-interior">
-            <div class="card-image"></div>
+            <div class="card-image-container">
+              <img class="card-image"/>
+            </div>
             <div class="card-info">
               <div class="card-title">
                 <h4>Frog</h4>
@@ -65,57 +51,23 @@
             </div>
           </div>
         </div>
+        -->
+      </div>
+      <div id="c2" class="column">
         
       </div>
-      <div class="column">
+      <div id="c3" class="column">
         
-        <div class="card">
-          <div class="card-interior">
-            <div class="card-image"></div>
-            <div class="card-info">
-              <div class="card-title">
-                <h4>Frog</h4>
-              </div>
-              <div class="card-user">
-                <p>Luke</p>
-              </div>
-              <div class="card-desc">
-                <p>It's a frog</p>
-              </div>
-              <div class="card-date">
-                <p>7 days ago</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class="column">
+      <div id="c4" class="column">
         
-        <div class="card">
-          <div class="card-interior">
-            <div class="card-image"></div>
-            <div class="card-info">
-              <div class="card-title">
-                <h4>Frog</h4>
-              </div>
-              <div class="card-user">
-                <p>Luke</p>
-              </div>
-              <div class="card-desc">
-                <p>It's a frog</p>
-              </div>
-              <div class="card-date">
-                <p>7 days ago</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       
     
       <section id="inputterWindow" class="window" data-active="false">
         <div class="windowTopbar">
-          <h2 class="windowTitle" class="noSelect">Submit New Link</h2>
+          <h2 id="newLinkBar" class="windowTitle noSelect" data-active="true">Submit New Link</h2>
+          <h2 id="updateLinkBar" class="windowTitle noSelect" data-active="false">Update Link</h2>
           <div class="closeButton noSelect">
             X
           </div>
@@ -129,10 +81,15 @@
         
         <p id="errorLinkBroken" class="errorWarning"  data-active="false">Link entered isn't valid</p>
         
-        <div id="linkFind" class="noSelect">Find Image</div>
+        <div id="linkFind">
+          <p id="linkFindSTART" class="noSelect" data-active="true">Find Image</p>
+          <p id="linkFindPROGRESS" class="noSelect" data-active="false">Finding...</p>
+          <p id="linkFindSUCCESS" class="noSelect" data-active="false">Found!</p>
+          <p id="linkFindFAILED" class="noSelect" data-active="false">Not Found!</p>
+        </div>
 
         <div id="imagePreviewBox">
-          <img id="imagePreview" src="https://images2.onionstatic.com/clickhole/3447/6/original/600.jpg"/>
+          <img id="imagePreview" />
         </div>
 
         <textarea id="linkDescription" wrap="soft" placeholder="Description"></textarea>
@@ -141,7 +98,10 @@
 
         <ul>
           <li id="submitLink" >
-            <p class="noSelect">Submit</p>
+            <p id="submitSTART" class="noSelect" data-active="true">Submit</p>
+            <p id="submitPROGRESS" class="noSelect" data-active="false">Loading...</p>
+            <p id="submitSUCCESS" class="noSelect" data-active="false">Success!</p>
+            <p id="submitFAILED" class="noSelect" data-active="false">Failed!</p>
           </li>
           <li id="cancelSubmitLink" >
             <p class="noSelect">Cancel</p>
@@ -149,36 +109,15 @@
         </ul>
         <p id="errorFailedSubmission" class="errorWarning"  data-active="false">Submission failed</p>
       </section>
+      
+      <div class="loadBox noSelect" data-active="false">
+        Refreshing...
+      </div>
     
       <div id="blackOutDiv" data-active="false"></div>
     </div>
   </div>
 
 
-  <!--
-    <section id="top">
-      <h3>POST Status Code Tests</h3>
-      <form id="nameForm" action="/addUser" method="post">
-        <label for="name">Name: </label>
-        <input id="nameField" type="text" name="name" />
-        <label for="age">Age: </label>
-        <input id="ageField" type="number" name="age" min="0" max="100" step="1"/>
-        <input type="submit" value="Add User" />
-      </form>
-      <form id="userForm" action="/getUsers" method="get">
-        <select id='urlField'>
-          <option value='/getUsers'>/getUsers</option>
-          <option value='/notReal'>/notReal</option>
-        </select>
-        <select id="methodSelect">
-          <option value="get">GET</option>
-          <option value="head">HEAD</option>
-        </select>
-        <input type="submit" value="Get User" />
-      </form>
-    </section>
-    <section id="content">
-    </section>
-  -->
 </body>
 </html>

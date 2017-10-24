@@ -1,30 +1,79 @@
-const parse = (xhr, content) => {
-  /*const res = JSON.parse(xhr.response);
-
-  if (res['message']) {
-    content.innerHTML += `<p>Message: ${res.message} </p>`;
-  } else if (res['users']) {
-    content.innerHTML += `<p>${JSON.stringify(res.users)} </p>`;
-  }*/
-};
-
-const handleResponse = (xhr, parseResponse) => {
-
+// Basic response handler
+const handleResponse = (xhr, method) => {
+  // function to be overriden for the switch case
+  let func;
   switch(xhr.status) {
     case 200:
-      //content.innerHTML = `<b>Success</b>`;
+      // check if this was a HEAD request or GET
+      if (method === 'HEAD') {
+        // if it was a head, it means data changed and we need to reload it
+        sendGet(null, 'GET');
+      } else {
+        // parse the cards data
+        parseCards(xhr.response);
+      }
       break;
     case 201:
-      //content.innerHTML = `<b>Create</b>`;
+      func = () => {
+        // display that the creation was a success
+        const submitSTART = inputterWindow.querySelector('#submitSTART');
+        const submitPROGRESS = inputterWindow.querySelector('#submitPROGRESS');
+        const submitSUCCESS = inputterWindow.querySelector('#submitSUCCESS');
+        
+        submitPROGRESS.dataset.active = 'false';
+        submitSUCCESS.dataset.active = 'true';
+        
+        setTimeout(() => {
+          submitSTART.dataset.active = 'true';
+          submitSUCCESS.dataset.active = 'false';
+          
+          inputterWindowOpener();
+        }, 2000);
+      };
+      func();
       break;
     case 204:
-      //content.innerHTML = `<b>Updated</b>`;
+      func = () => {
+        // display that updating was a success
+        const submitSTART = inputterWindow.querySelector('#submitSTART');
+        const submitPROGRESS = inputterWindow.querySelector('#submitPROGRESS');
+        const submitSUCCESS = inputterWindow.querySelector('#submitSUCCESS');
+        
+        submitPROGRESS.dataset.active = 'false';
+        submitSUCCESS.dataset.active = 'true';
+        
+        setTimeout(() => {
+          submitSTART.dataset.active = 'true';
+          submitSUCCESS.dataset.active = 'false';
+          
+          inputterWindowOpener();
+        }, 2000);
+      };
+      func();
       break;
     case 304:
       //content.innerHTML = `<b>Success (HEAD)</b>`;
+      // hide the refreshing box
+      const refreshBox = document.querySelector('.loadBox');
+
+      refreshBox.dataset.active = 'false';
       break;
     case 400:
-      //content.innerHTML = `<b>Bad Request</b>`;
+      func = () => {
+        // display that the submission or update failed
+        const submitSTART = inputterWindow.querySelector('#submitSTART');
+        const submitPROGRESS = inputterWindow.querySelector('#submitPROGRESS');
+        const submitFAILED = inputterWindow.querySelector('#submitFAILED');
+        
+        submitPROGRESS.dataset.active = 'false';
+        submitFAILED.dataset.active = 'true';
+        
+        setTimeout(() => {
+          submitSTART.dataset.active = 'true';
+          submitFAILED.dataset.active = 'false';
+        }, 2000);
+      };
+      func();
       break;
     case 404:
       //content.innerHTML = `<b>Resource Not Found</b>`;
@@ -36,47 +85,39 @@ const handleResponse = (xhr, parseResponse) => {
       //content.innerHTML = `<b>Error Code not implemented by client`;
       break;
   }
-
-  if (parseResponse) {
-    parse(xhr, content);
-  }
 };
 
-const sendGet = () => {
-  const getAction = userForm.querySelector('#urlField').value;
-  const getMethod = userForm.querySelector('#methodSelect').value;
+// AJAX function for HEAD and GET methods
+const sendGet = (e, method) => {
+  // show that we're refreshing
+  const refreshBox = document.querySelector('.loadBox');
+
+  refreshBox.dataset.active = 'true';
 
   const xhr = new XMLHttpRequest();
-  xhr.open(getMethod, getAction);
+  xhr.open(method, '/getPosts');
   xhr.setRequestHeader('Accept', 'application/json');
 
-  if (getMethod === 'head') {
-    xhr.onload = () => handleResponse(xhr, false);
-  } else {
-    xhr.onload = () => handleResponse(xhr, true);
-  }
+  xhr.onload = () => handleResponse(xhr, method);
 
   xhr.send();
-
-  e.preventDefault();
+  
   return false;
 };
 
-const sendPost = (e, postObject) => {
-  
+// AJAX function for POST method
+const sendPost = (e, postObject, action) => {
+  // stringify the object
   const postObj = JSON.stringify(postObject);
-  
-  console.dir(postObj);
-  
+    
   const xhr = new XMLHttpRequest();
-  xhr.open('POST', '/newPost');
+  xhr.open('POST', action);
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('Accept', 'application/json');
 
-  xhr.onload = () => handleResponse(xhr, true);
+  xhr.onload = () => handleResponse(xhr);
   
   xhr.send(postObj);
   
-  e.preventDefault();
   return false;
 };
